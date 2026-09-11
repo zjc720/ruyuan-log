@@ -572,6 +572,12 @@ window.addEventListener("hashchange", function(){
   if (TABS.indexOf(x)>=0 && x !== state.tab){ state.tab = x; render(); }
 });
 render();
+/* 离线可用：注册 Service Worker（只在 https 上启用） */
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
 })();
 </script>
 </body>
